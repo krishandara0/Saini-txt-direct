@@ -27,7 +27,7 @@ from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-credit ="𝙎𝘼𝙄𝙉𝙄 𝘽𝙊𝙏𝙎" 
+credit ="" 
 # Initialize the bot
 bot = Client(
     "bot",
@@ -762,7 +762,7 @@ async def text_handler(bot: Client, m: Message):
                         pass
                                 
                 else:
-                    Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇸‌🇦‌🇮‌🇳‌🇮‌🐦`"
+                    Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `kd🐦`"
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
