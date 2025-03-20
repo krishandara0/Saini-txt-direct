@@ -718,19 +718,7 @@ async def text_handler(bot: Client, m: Message):
                         count += 1
                         pass    
 
-                elif ".zip" in url:
-                    try:
-                        cmd = f'yt-dlp -o "{name}.zip" "{url}"'
-                        download_cmd = f"{cmd} -R 25 --fragment-retries 25"
-                        os.system(download_cmd)
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.zip', caption=cc1)
-                        count += 1
-                        os.remove(f'{name}.zip')
-                    except FloodWait as e:
-                        await m.reply_text(str(e))
-                        time.sleep(e.x)
-                        count += 1
-                        pass    
+                
 
                 elif any(ext in url for ext in [".mp3", ".wav", ".m4a"]):
                     try:
@@ -764,7 +752,40 @@ async def text_handler(bot: Client, m: Message):
                 else:
                     Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `kd🐦`"
                     prog = await m.reply_text(Show)
-                    res_file = await helper.download_video(url, cmd, name)
+                elif ".zip" in url:
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+
+        # Start the request
+        response = requests.get(url, headers=headers, stream=True)
+
+        if response.status_code == 200:
+            zip_file_path = f"{name}.zip"
+            
+            # Write the file in chunks to avoid memory issues
+            with open(zip_file_path, "wb") as file:
+                for chunk in response.iter_content(chunk_size=8192):  # Use 8KB chunks
+                    file.write(chunk)
+
+            # Send the complete ZIP file
+            await bot.send_document(chat_id=m.chat.id, document=zip_file_path, caption=cczip)
+            
+            # Remove the file after sending
+            os.remove(zip_file_path)
+        
+        else:
+            await m.reply_text(f"Failed to download ZIP file. HTTP Status: {response.status_code}")
+
+    except FloodWait as e:
+        await m.reply_text(str(e))
+        time.sleep(e.x)
+        count += 1
+        continue
+
+    except Exception as e:
+        await m.reply_text(f"Error downloading ZIP: {str(e)}")    res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
                     await prog.delete(True)
                     await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
