@@ -729,12 +729,12 @@ async def text_handler(bot: Client, m: Message):
                         count += 1
                         os.remove(f'{name}.{ext}')
 
-elif ".zip" in url:
-    try:
-        # Set headers to avoid being blocked
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-        }
+            elif ".zip" in url:
+                try:
+                    # Set headers to avoid being blocked
+                    headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                    }
 
         # Start the request
         response = requests.get(url, headers=headers, stream=True)
