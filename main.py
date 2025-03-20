@@ -728,7 +728,11 @@ async def text_handler(bot: Client, m: Message):
                         await bot.send_document(chat_id=m.chat.id, document=f'{name}.{ext}', caption=cc1)
                         count += 1
                         os.remove(f'{name}.{ext}')
-                    except FloodWait aimport requests
+except FloodWait as e:
+    await m.reply_text(str(e))
+    time.sleep(e.x)
+    count += 1
+    continue
 
 elif ".zip" in url:
     try:
