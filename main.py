@@ -753,7 +753,7 @@ async def text_handler(bot: Client, m: Message):
                     Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `kd🐦`"
                     prog = await m.reply_text(Show)
                 
-                elif ".zip" in url:
+               elif ".zip" in url:
                     try:
                         cmd = f'yt-dlp -o "{name}.zip" "{url}"'
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"
